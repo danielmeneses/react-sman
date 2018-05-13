@@ -83,6 +83,10 @@ class StateManager {
     return this;
   }
 
+  getState() {
+    return coreState;
+  }
+
   registerAction(actionName, fn) {
     this.actionsList[actionName] = fn;
   }

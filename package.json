@@ -10,7 +10,7 @@
     "start": "run-p 'build:* -- --watch'",
     "build:module": "cross-env MODULE=true babel src -d lib/module",
     "build:main": "babel src -d lib/main",
-    "build": "run-p clean build:*",
+    "build": "run-p clean build:* test",
     "example": "nodemon --exec babel-node --inspect=9229 src/examples/index.js"
   },
   "author": "Daniel Meneses <pro.danielmeneses@gmail.com>",
@@ -51,6 +51,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.42",
+    "loglevel": "^1.6.1",
     "object-path-immutable": "^1.0.2"
   },
   "engines": {
