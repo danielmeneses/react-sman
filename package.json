@@ -1,6 +1,6 @@
 {
   "name": "react-sman",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Very easy to use and a pico state manager for react apps.",
   "main": "lib/main",
   "module": "lib/module",
