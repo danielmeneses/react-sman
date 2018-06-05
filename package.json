@@ -8,9 +8,9 @@
     "test": "jest --verbose",
     "clean": "rimraf lib",
     "start": "run-p 'build:* -- --watch'",
-    "build:module": "cross-env MODULE=true babel src -d lib/module",
-    "build:main": "babel src -d lib/main",
-    "build": "run-p clean build:* test",
+    "build:module": "mkdir -p lib/module && cross-env MODULE=true babel src -d lib/module",
+    "build:main": "mkdir -p lib/main && babel src -d lib/main",
+    "build": "run-s clean build:* test",
     "example": "nodemon --exec babel-node --inspect=9229 src/examples/index.js"
   },
   "author": "Daniel Meneses <pro.danielmeneses@gmail.com>",
@@ -53,8 +53,5 @@
     "@babel/runtime": "^7.0.0-beta.42",
     "loglevel": "^1.6.1",
     "object-path-immutable": "^1.0.2"
-  },
-  "engines": {
-    "node": ">=6.10"
   }
 }

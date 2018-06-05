@@ -1,5 +1,3 @@
-const { engines: { node } } = require('./package.json');
-
 module.exports = {
   comments: false,
   presets: [
@@ -9,9 +7,7 @@ module.exports = {
         shippedProposals: true,
         modules: 'commonjs',
         useBuiltIns: 'usage',
-        targets: {
-          node: node.substring(2) // remove >= from the version defined in package.json
-        }
+        targets: [">1%", "last 2 versions", "not ie <= 8"]
       }
     ]
   ],
