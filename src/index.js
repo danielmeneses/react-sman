@@ -78,6 +78,15 @@ class StateManager {
       }
       component.state = state;
     }
+    // add mount control
+    component.componentWillUnmount = componentMount(
+      component.componentWillUnmount,
+      true
+    );
+    component.componentDidMount = componentMount(
+      component.componentDidMount,
+      false
+    );
     // attach manager
     component.triggerAction = this.trigger;
     return this;
@@ -112,6 +121,13 @@ class StateManager {
   }
 }
 
+function componentMount(fn, unmouted) {
+  return function() {
+    this._unmouted = unmouted;
+    if (typeof fn === 'function') fn.call(this);
+  };
+}
+
 const setState = function(_state) {
   // console.time('Update time');
   coreState = immutableSet(coreState, _state);
@@ -128,10 +144,12 @@ const setState = function(_state) {
     for (let i = 0; i < toUpdate.length; i++) {
       const item = toUpdate[i][0];
       const props = toUpdate[i][1];
-      item.setState({
-        ...item.state,
-        ...props
-      });
+      if (item._unmouted) toUpdate[i].splice(i, 1);
+      else
+        item.setState({
+          ...item.state,
+          ...props
+        });
     }
 
   // console.timeEnd('Update time');
